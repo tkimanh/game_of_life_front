@@ -30,7 +30,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.grid)
   },
   
   methods: {
@@ -44,13 +43,37 @@ export default {
               (cell) => cell.row === rowIndex && cell.cell === cellIndex
             ),
           )
-    
-      console.log(this.trueCells)
     },
 
+  
     stepPlus(step) {
-      console.log(this.grid)
-      
+
+      this.trueCells.forEach((cell) => {
+        let rowIndex = cell.row
+        let cellIndex = cell.cell
+        console.log('================================================')
+        console.log('rowIndex', rowIndex, 'cellIndex', cellIndex)
+
+        let previusRow = rowIndex-1
+        let nextRow = rowIndex+1
+        let nextCell = cellIndex+1
+        let previusCell = cellIndex-1
+
+        let diagonalNextUpRow = nextRow + nextCell
+        let diagonalNextDownRow = nextRow - nextCell
+        console.log('================================================')
+        console.log('previusRow', previusRow, 'nextRow', nextRow)
+        console.log('nextCell', nextCell, 'previusCell', previusCell)
+        console.log('diagonalNextUpRow', diagonalNextUpRow, 'diagonalNextDownRow', diagonalNextDownRow)
+
+        // let previusRow = row-1
+        // let nextRow = row+1
+        // console.log('previusRow', previusRow, 'nextRow', nextRow)
+
+        // if (this.grid[row][cellIndex] === true) {
+          //   this.grid[row][cellIndex] = false
+          // }
+        })
     }
   }
 
