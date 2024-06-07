@@ -1,5 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import Menu from './views/MenuView.vue'
 </script>
 
 <template>
@@ -9,6 +10,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démo Vue</title>
   </head>
+
+  <Menu />
   
   <header>
     <div class="wrapper">
