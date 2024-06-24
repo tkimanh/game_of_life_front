@@ -37,23 +37,23 @@ export default {
   },
 
   methods: {
+  // modifie la valeur de la cellule true ou false
     updateCell(rowIndex, cellIndex) {
       this.grid[rowIndex][cellIndex] = !this.grid[rowIndex][cellIndex]
 
       if (this.grid[rowIndex][cellIndex]) {
         this.trueCells.push({ row: rowIndex, cell: cellIndex });
-      } else {
-        this.trueCells = this.trueCells.filter(
-          cell => cell.row !== rowIndex || cell.cell !== cellIndex
-        );
-      }
+      } 
     },
 
     stepPlus() {
+      // tabbleau qui contiendra les nouvelles valeurs des cellules
       let newStates = [];
 
+      // parcours de chaque cellule de la grille 
       for (let i = 0; i < this.grid.length; i++) {
         for (let j = 0; j < this.grid[i].length; j++) {
+
           let adjacentTrueCount = this.countAdjacentTrue(i, j);
 
           if (!this.grid[i][j] && adjacentTrueCount === 3) {
@@ -71,6 +71,7 @@ export default {
 
     countAdjacentTrue(row, cell) {
       let count = 0;
+      // possibilités de cellules adjacentes
       const possibilities = [
         [row - 1, cell - 1], 
         [row, cell - 1], 
@@ -81,6 +82,7 @@ export default {
         [row, cell + 1], 
         [row + 1, cell + 1]
       ];
+
 
       possibilities.forEach(([x, y]) => {
         if (x >= 0 && x < this.grid.length && y >= 0 && y < this.grid[0].length && this.grid[x][y]) {
