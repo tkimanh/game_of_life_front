@@ -14,6 +14,13 @@
     <div @click="stepPlus">
       <button class="btn">Etape suivante</button>
     </div>
+    <div @click="run">
+      <button class="btn">Lancer</button>
+    </div>
+    <div @click="stop">
+      <button class="btn">Stop</button>
+    </div>
+
   </div>
 </template>
 
@@ -92,6 +99,19 @@ export default {
       })
 
       return count
+    },
+
+    run(){
+      this.intervalId = setInterval(() => {
+      this.stepPlus();
+    }, 500);
+    },
+
+    stop(){
+      if (this.intervalId !== null) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
     }
   }
 }
