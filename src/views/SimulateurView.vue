@@ -9,73 +9,89 @@
         @click="updateCell(rowIndex, cellIndex)"
       ></div>
     </div>
-    
+    <div @click="stepPlus">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+    </div>
   </div>
-  <div @click="stepPlus(step)">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-  </svg>
-</div>  
 </template>
 
 <script>
 export default {
   data() {
     return {
-      grid: Array(8)
+      grid: Array(16)
         .fill()
-        .map(() => Array(8).fill(false)),
+        .map(() => Array(16).fill(false)),
       trueCells: [],
-      step: 1,
+      step: 1
     }
   },
-  mounted() {
-  },
-  
+
   methods: {
     updateCell(rowIndex, cellIndex) {
       this.grid[rowIndex][cellIndex] = !this.grid[rowIndex][cellIndex]
 
-      this.grid[rowIndex][cellIndex] === true
-        ? this.trueCells.push({ row: rowIndex, cell: cellIndex })
-        : this.trueCells.splice(
-            this.trueCells.findIndex(
-              (cell) => cell.row === rowIndex && cell.cell === cellIndex
-            ),
-          )
+      if (this.grid[rowIndex][cellIndex]) {
+        this.trueCells.push({ row: rowIndex, cell: cellIndex });
+      } else {
+        this.trueCells = this.trueCells.filter(
+          cell => cell.row !== rowIndex || cell.cell !== cellIndex
+        );
+      }
     },
 
-  
-    stepPlus(step) {
+    stepPlus() {
+      let newStates = [];
 
-      this.trueCells.forEach((cell) => {
-        let rowIndex = cell.row
-        let cellIndex = cell.cell
-        console.log('================================================')
-        console.log('rowIndex', rowIndex, 'cellIndex', cellIndex)
+      for (let i = 0; i < this.grid.length; i++) {
+        for (let j = 0; j < this.grid[i].length; j++) {
+          let adjacentTrueCount = this.countAdjacentTrue(i, j);
 
-        let previusRow = rowIndex-1
-        let nextRow = rowIndex+1
-        let nextCell = cellIndex+1
-        let previusCell = cellIndex-1
+          if (!this.grid[i][j] && adjacentTrueCount === 3) {
+            newStates.push({ row: i, cell: j, state: true });
+          } else if (this.grid[i][j] && (adjacentTrueCount < 2 || adjacentTrueCount > 3)) {
+            newStates.push({ row: i, cell: j, state: false });
+          }
+        }
+      }
 
-        let diagonalNextUpRow = nextRow + nextCell
-        let diagonalNextDownRow = nextRow - nextCell
-        console.log('================================================')
-        console.log('previusRow', previusRow, 'nextRow', nextRow)
-        console.log('nextCell', nextCell, 'previusCell', previusCell)
-        console.log('diagonalNextUpRow', diagonalNextUpRow, 'diagonalNextDownRow', diagonalNextDownRow)
+      newStates.forEach(({ row, cell, state }) => {
+        this.grid[row][cell] = state;
+      });
+    },
 
-        // let previusRow = row-1
-        // let nextRow = row+1
-        // console.log('previusRow', previusRow, 'nextRow', nextRow)
+    countAdjacentTrue(row, cell) {
+      let count = 0;
+      const possibilities = [
+        [row - 1, cell - 1], 
+        [row, cell - 1], 
+        [row + 1, cell - 1],
+        [row - 1, cell],                 
+        [row + 1, cell],
+        [row - 1, cell + 1], 
+        [row, cell + 1], 
+        [row + 1, cell + 1]
+      ];
 
-        // if (this.grid[row][cellIndex] === true) {
-          //   this.grid[row][cellIndex] = false
-          // }
-        })
+      possibilities.forEach(([x, y]) => {
+        if (x >= 0 && x < this.grid.length && y >= 0 && y < this.grid[0].length && this.grid[x][y]) {
+          count++;
+        }
+      });
+
+      return count;
     }
   }
-
 }
 </script>
+
+
