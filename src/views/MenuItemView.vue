@@ -1,9 +1,11 @@
 <script setup>
+import { RouterLink } from 'vue-router'
+
 const props = defineProps(['item', 'collapsed'])
 </script>
 
 <template>
-  <a href="#" @click.prevent="props.item.onClick">
+  <RouterLink :to="props.item.to">
     <div class="item">
       <div class="item__icon">
         <img
@@ -17,7 +19,7 @@ const props = defineProps(['item', 'collapsed'])
         {{ props.item.title }}
       </div>
     </div>
-  </a>
+  </RouterLink>
 </template>
 
 <style scoped>

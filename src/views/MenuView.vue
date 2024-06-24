@@ -37,7 +37,6 @@ let collapsed = ref(false)
   background-color: #ff5555;
   height: 100vh;
   transition: width 0.3s;
-  position: fixed;
   left: 0;
   top: 0;
 }

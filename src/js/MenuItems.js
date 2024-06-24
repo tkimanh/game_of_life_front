@@ -6,7 +6,8 @@ export default {
       src: 'https://img.icons8.com/ios-filled/50/pixel-star.png',
       alt: 'Icône de simulateur',
       width: '30',
-      height: '30'
+      height: '30',
+      to: '/'
     },
     {
       id: 1,
@@ -15,9 +16,7 @@ export default {
       alt: 'Icône de règles du jeu',
       width: '30',
       height: '30',
-      onClick() {
-        console.log('Home')
-      }
+      to: '/about'
     },
     {
       id: 2,
@@ -25,10 +24,7 @@ export default {
       src: 'https://img.icons8.com/external-flat-icons-inmotus-design/30/external-book-literature-flat-icons-inmotus-design-8.png',
       alt: 'Icône de wiki',
       width: '30',
-      height: '30',
-      onClick() {
-        console.log('Reports')
-      }
+      height: '30'
     },
     {
       id: 3,
@@ -36,10 +32,7 @@ export default {
       src: 'https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/30/external-sign-in-user-interface-tanah-basah-detailed-outline-tanah-basah.png',
       alt: 'Icône de wiki',
       width: '30',
-      height: '30',
-      onClick() {
-        console.log('Reports')
-      }
+      height: '30'
     }
   ]
 }
