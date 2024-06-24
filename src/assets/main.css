@@ -22,3 +22,7 @@
   display: inline-flex;
   gap: 20px;
 }
+
+#page-wrap {
+  margin: 2rem;
+}
