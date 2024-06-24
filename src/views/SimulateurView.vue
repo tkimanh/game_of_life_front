@@ -28,9 +28,9 @@
 export default {
   data() {
     return {
-      grid: Array(16)
+      grid: Array(14)
         .fill()
-        .map(() => Array(16).fill(false)),
+        .map(() => Array(14).fill(false)),
       trueCells: [],
       step: 1
     }

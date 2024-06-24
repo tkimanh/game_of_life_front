@@ -38,7 +38,6 @@ let collapsed = ref(false)
   height: 100vh;
   transition: width 0.3s;
   left: 0;
-  top: 0;
 }
 
 .collapsed {
