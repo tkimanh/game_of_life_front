@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <div v-for="(row, rowIndex) in grid" :key="'row' + rowIndex" class="row flex">
       <div
         v-for="(cell, cellIndex) in row"
@@ -36,62 +36,68 @@ export default {
     }
   },
 
+  mounted() {},
+
   methods: {
     updateCell(rowIndex, cellIndex) {
       this.grid[rowIndex][cellIndex] = !this.grid[rowIndex][cellIndex]
 
       if (this.grid[rowIndex][cellIndex]) {
-        this.trueCells.push({ row: rowIndex, cell: cellIndex });
+        this.trueCells.push({ row: rowIndex, cell: cellIndex })
       } else {
         this.trueCells = this.trueCells.filter(
-          cell => cell.row !== rowIndex || cell.cell !== cellIndex
-        );
+          (cell) => cell.row !== rowIndex || cell.cell !== cellIndex
+        )
       }
     },
 
     stepPlus() {
-      let newStates = [];
+      let newStates = []
 
       for (let i = 0; i < this.grid.length; i++) {
         for (let j = 0; j < this.grid[i].length; j++) {
-          let adjacentTrueCount = this.countAdjacentTrue(i, j);
+          let adjacentTrueCount = this.countAdjacentTrue(i, j)
 
           if (!this.grid[i][j] && adjacentTrueCount === 3) {
-            newStates.push({ row: i, cell: j, state: true });
+            newStates.push({ row: i, cell: j, state: true })
           } else if (this.grid[i][j] && (adjacentTrueCount < 2 || adjacentTrueCount > 3)) {
-            newStates.push({ row: i, cell: j, state: false });
+            newStates.push({ row: i, cell: j, state: false })
           }
         }
       }
 
       newStates.forEach(({ row, cell, state }) => {
-        this.grid[row][cell] = state;
-      });
+        this.grid[row][cell] = state
+      })
     },
 
     countAdjacentTrue(row, cell) {
-      let count = 0;
+      let count = 0
       const possibilities = [
-        [row - 1, cell - 1], 
-        [row, cell - 1], 
+        [row - 1, cell - 1],
+        [row, cell - 1],
         [row + 1, cell - 1],
-        [row - 1, cell],                 
+        [row - 1, cell],
         [row + 1, cell],
-        [row - 1, cell + 1], 
-        [row, cell + 1], 
+        [row - 1, cell + 1],
+        [row, cell + 1],
         [row + 1, cell + 1]
-      ];
+      ]
 
       possibilities.forEach(([x, y]) => {
-        if (x >= 0 && x < this.grid.length && y >= 0 && y < this.grid[0].length && this.grid[x][y]) {
-          count++;
+        if (
+          x >= 0 &&
+          x < this.grid.length &&
+          y >= 0 &&
+          y < this.grid[0].length &&
+          this.grid[x][y]
+        ) {
+          count++
         }
-      });
+      })
 
-      return count;
+      return count
     }
   }
 }
 </script>
-
-
