@@ -11,20 +11,26 @@
         ></div>
       </div>
     </div>
-    <div @click="stepPlus">
-      <button class="btn">Etape suivante</button>
+    <div class="flex flex-col">
+      <div>
+        <p>Etape : {{ step }}</p>
+      </div>
+      <div @click="stepPlus">
+        <button class="btn">Etape suivante</button>
+      </div>
+      <div>
+    <button class="btn" @click="run" v-if="!intervalId">Lancer</button>
+    <button class="btn" @click="stop" v-else>Stop</button>
+  </div>
+      <div @click="clear">
+        <button class="btn">Clear</button>
     </div>
-    <div @click="run">
-      <button class="btn">Lancer</button>
     </div>
-    <div @click="stop">
-      <button class="btn">Stop</button>
-    </div>
-
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -32,7 +38,7 @@ export default {
         .fill()
         .map(() => Array(14).fill(false)),
       trueCells: [],
-      step: 1
+      step: 0,
     }
   },
 
@@ -51,7 +57,7 @@ export default {
     stepPlus() {
       // tabbleau qui contiendra les nouvelles valeurs des cellules
       let newStates = [];
-
+      let step = this.step++;
       // parcours de chaque cellule de la grille 
       for (let i = 0; i < this.grid.length; i++) {
         for (let j = 0; j < this.grid[i].length; j++) {
@@ -105,13 +111,23 @@ export default {
       this.intervalId = setInterval(() => {
       this.stepPlus();
     }, 500);
+    if(!this.grid[rowIndex][cellIndex])
+    {
+      this.stop();
+    }
     },
 
     stop(){
       if (this.intervalId !== null) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+      } 
+    },
+    clear(){
+      let step = 0;
+      this.grid = Array(14)
+        .fill()
+        .map(() => Array(14).fill(false));
     }
   }
 }
