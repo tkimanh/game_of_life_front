@@ -1,15 +1,11 @@
 <template>
   <div class="about p-4 md:p-8">
     <h2 class="text-2xl font-bold mb-4">Règle du jeu</h2>
-    <Modal
-      v-show="isModalVisible"
-      @close="closeModal"
-    />
     <p class="mb-4">Le Jeu de la Vie est un modèle mathématique imaginé en 1970 par John Conway.</p>
       <p class="md:w-1/2 mb-4 md:mb-0 md:mr-4">
         Il s’agit d’un automate cellulaire où des cellules évoluent sur une grille bidimensionnelle à chaque tour selon des règles bien précises. <br> Une cellule peut être dans 2 états : morte ou vivante.
       </p>
-      <img class="py-4 object-none" src="../assets/about/cellules.png" alt="cellule" />
+      <img class="py-4 object-cover" src="../assets/about/cellules.png" alt="cellule" />
  
     <p class="mb-4">
       À partir de cet état initial, notre automate peut commencer à prendre vie à travers un enchaînement de générations où nos cellules respectent 3 règles :
@@ -58,8 +54,6 @@
         allowfullscreen
       ></iframe>
     </div>
-    <h2 class="text-2xl font-bold mb-4">Histoire</h2>
-    <h2 class="text-2xl font-bold mb-4">Exemples</h2>
   </div>
 </template>
 
