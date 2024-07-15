@@ -35,7 +35,7 @@ let collapsed = ref(false)
 <style scoped>
 .menu {
   background-color: #ff5555;
-  height: 100vh;
+  min-height: 100vh;
   transition: width 0.3s;
   left: 0;
 }
