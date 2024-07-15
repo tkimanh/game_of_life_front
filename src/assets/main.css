@@ -23,6 +23,11 @@
   gap: 20px;
 }
 
+.block-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 #page-wrap {
   margin: 2rem;
 }
