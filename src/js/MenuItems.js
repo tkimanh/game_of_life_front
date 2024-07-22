@@ -32,7 +32,8 @@ export default {
       src: 'https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/30/external-sign-in-user-interface-tanah-basah-detailed-outline-tanah-basah.png',
       alt: 'Icône de wiki',
       width: '30',
-      height: '30'
+      height: '30',
+      to: '/login'
     }
   ]
 }
